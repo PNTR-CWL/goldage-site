@@ -2,6 +2,12 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName System.Media
 
+# Ścieżka tymczasowa na dźwięk
+$soundPath = "$env:TEMP\scary_sound.wav"
+
+# Pobierz dźwięk z GitHub (podmień link na swój, jeśli chcesz)
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PNTR-CWL/flipper-fakemalware/main/scary_sound.wav" -OutFile $soundPath
+
 function Show-DeadWindow {
     $form = New-Object Windows.Forms.Form
     $form.Text = "💀 WARNING"
@@ -18,36 +24,34 @@ function Show-DeadWindow {
     $label.Font = New-Object Drawing.Font("Arial",14,[Drawing.FontStyle]::Bold)
     $form.Controls.Add($label)
 
-    # Losowa pozycja
+    # Losowa pozycja na ekranie
     $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
-    $rand = Get-Random -Minimum 0 -Maximum ($screen.Width - 200)
-    $rand2 = Get-Random -Minimum 0 -Maximum ($screen.Height - 100)
-    $form.Location = New-Object Drawing.Point($rand, $rand2)
+    $randX = Get-Random -Minimum 0 -Maximum ($screen.Width - 200)
+    $randY = Get-Random -Minimum 0 -Maximum ($screen.Height - 100)
+    $form.Location = New-Object Drawing.Point($randX, $randY)
 
-    # Przygotuj SoundPlayer do dźwięku w pętli
+    # Przygotuj SoundPlayer i odtwarzaj pętlę
     $soundPlayer = New-Object System.Media.SoundPlayer
-    # Możesz podmienić poniższy dźwięk na inny plik WAV, np. z dysku lub netu
-    $soundPlayer.SoundLocation = $env:TEMP\scary_sound.wav"
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PNTR-CWL/flipper-fakemalware/main/scary_sound.wav" -OutFile $soundPlayer.SoundLocation
+    $soundPlayer.SoundLocation = $soundPath
     $soundPlayer.Load()
     $soundPlayer.PlayLooping()
 
-    # Obsługa kliknięcia i zamknięcia — tworzy nowe okienka
+    # Po kliknięciu lub zamknięciu tworzy nowe okno (nowy proces w tle)
     $form.Add_Click({ Start-Job { Show-DeadWindow } })
-    $form.Add_FormClosed({ 
+    $form.Add_FormClosed({
         $soundPlayer.Stop()
         Start-Job { Show-DeadWindow }
     })
 
-    # Ruch okna
+    # Timer do ruchu okienka
     $timer = New-Object Windows.Forms.Timer
     $timer.Interval = 150
     $timer.Add_Tick({
         $dx = Get-Random -Minimum -40 -Maximum 40
         $dy = Get-Random -Minimum -40 -Maximum 40
-        $x = [Math]::Max(0, [Math]::Min($screen.Width - 200, $form.Location.X + $dx))
-        $y = [Math]::Max(0, [Math]::Min($screen.Height - 100, $form.Location.Y + $dy))
-        $form.Location = New-Object Drawing.Point($x, $y)
+        $newX = [Math]::Max(0, [Math]::Min($screen.Width - 200, $form.Location.X + $dx))
+        $newY = [Math]::Max(0, [Math]::Min($screen.Height - 100, $form.Location.Y + $dy))
+        $form.Location = New-Object Drawing.Point($newX, $newY)
     })
     $timer.Start()
 
