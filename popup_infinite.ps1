@@ -1,12 +1,5 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
-Add-Type -AssemblyName System.Media
-
-# Ścieżka tymczasowa na dźwięk
-$soundPath = "$env:TEMP\scary_sound.wav"
-
-# Pobierz dźwięk z GitHub (podmień link na swój, jeśli chcesz)
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PNTR-CWL/flipper-fakemalware/main/scary_sound.wav" -OutFile $soundPath
 
 function Show-DeadWindow {
     $form = New-Object Windows.Forms.Form
@@ -30,18 +23,9 @@ function Show-DeadWindow {
     $randY = Get-Random -Minimum 0 -Maximum ($screen.Height - 100)
     $form.Location = New-Object Drawing.Point($randX, $randY)
 
-    # Przygotuj SoundPlayer i odtwarzaj pętlę
-    $soundPlayer = New-Object System.Media.SoundPlayer
-    $soundPlayer.SoundLocation = $soundPath
-    $soundPlayer.Load()
-    $soundPlayer.PlayLooping()
-
-    # Po kliknięciu lub zamknięciu tworzy nowe okno (nowy proces w tle)
+    # Po kliknięciu lub zamknięciu tworzy nowe okno
     $form.Add_Click({ Start-Job { Show-DeadWindow } })
-    $form.Add_FormClosed({
-        $soundPlayer.Stop()
-        Start-Job { Show-DeadWindow }
-    })
+    $form.Add_FormClosed({ Start-Job { Show-DeadWindow } })
 
     # Timer do ruchu okienka
     $timer = New-Object Windows.Forms.Timer
