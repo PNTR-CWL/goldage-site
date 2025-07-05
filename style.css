@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+    width: 100%; /* Ensure the width does not exceed the viewport */
+    max-width: 100%; /* Prevent content from exceeding the viewport width */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+body {
+    background-color: #111;
+    color: gold; 
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Ensure vertical scrolling works */
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #000;
+    min-width: 100vw; /* Ensure video spans the full width */
+    min-height: 100vh; /* Ensure video spans the full height */
+}
+
+.video-background.loaded {
+    opacity: 1;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(34, 34, 34, 0.9);
+    padding: 10px 0;
+    box-shadow: 0 0 10px gold;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between; /* Space between title and links */
+    align-items: center;
+    gap: 10px; /* Add spacing between elements */
+}
+
+.navbar h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+    transition: font-size 0.3s ease-in-out;
+    margin-left: 10px; /* Add some padding from the left edge */
+}
+
+@media (max-width: 400px) {
+    .navbar h1 {
+        font-size: 1.8rem; /* Reduce font size for smaller screens */
+    }
+}
+
+.navbar a {
+    color: gold;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 15px;
+    transition: transform 0.2s, text-decoration 0.2s;
+}
+
+.navbar a:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 100%; /* Prevent content from exceeding the screen width */
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Change to column for better scaling */
+    justify-content: center; /* Center content vertically */
+    align-items: center;
+    gap: 50px;
+}
+
+.server-info, .description {
+    max-width: 400px;
+    text-align: center; /* Ensure consistent alignment */
+}
+
+.server-info {
+    text-align: left; /* Align text to the left */
+    margin-left: 0; /* Remove extra left margin */
+    align-self: flex-start; /* Align the section to the left side */
+    max-width: 600px; /* Increase the width for better layout */
+    margin-top: 200px; /* Move the section even lower */
+}
+
+.server-info h1 {
+    font-size: 4rem; /* Increase the font size */
+    margin: 0; /* Remove extra margin */
+    white-space: normal; /* Allow wrapping only where necessary */
+}
+
+.server-info p, .server-info h2 {
+    font-size: 1.8rem; /* Increase font size for better visibility */
+}
+
+.server-info h2 {
+    font-size: 1.8rem; /* Keep the font size */
+    margin-bottom: -30px; /* Reduce the margin below the heading */
+}
+
+.description {
+    margin-top: 20px; /* Adjust margin to prevent overlap */
+    max-width: 400px;
+}
+
+.server-ip {
+    cursor: pointer;
+    padding: 15px;
+    background: gold;
+    color: black;
+    border-radius: 5px;
+    display: inline-block;
+    transition: transform 0.2s, background 0.3s;
+    font-size: 1.5rem; /* Increase font size for better visibility */
+    margin: 10px 0; /* Add spacing between elements */
+}
+
+.server-ip:hover {
+    transform: scale(1.1);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+.notification {
+    position: fixed;
+    bottom: -100px; /* Move further out of view */
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: black;
+    padding: 15px 20px; /* Increase padding for better spacing */
+    border-radius: 5px;
+    box-shadow: 0 0 10px gold;
+    transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Add opacity transition */
+    white-space: normal; /* Allow text to wrap */
+    text-align: center; /* Center align text */
+    max-width: 90%; /* Limit width for smaller screens */
+    font-size: 1rem; /* Adjust font size for readability */
+    line-height: 1.5; /* Add line spacing for better readability */
+    visibility: hidden; /* Ensure it's hidden when not active */
+    opacity: 0; /* Make it invisible */
+}
+
+.show-notification {
+    bottom: 20px; /* Show notification */
+    visibility: visible; /* Make it visible */
+    opacity: 1; /* Fade in */
+}
+
+.hide-notification {
+    bottom: -100px; /* Move notification out of view */
+    opacity: 0; /* Fade out */
+    visibility: hidden; /* Ensure it's hidden after fading out */
+}
+
+.link {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    color: gold;
+    text-decoration: none;
+    background: #333;
+    border: 2px solid gold;
+    border-radius: 5px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.link:hover {
+    transform: scale(1.05);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+.skip-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: gold;
+    color: black;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    z-index: 20;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gold;
+    transition: transform 0.2s ease-in-out;
+}
+
+.skip-button:hover {
+    transform: scale(1.1);
+}
+
+.menu {
+    display: flex; /* Always display menu by default */
+    flex-direction: row; /* Align items horizontally */
+    position: static; /* Reset position for larger screens */
+    background: none; /* Remove background for larger screens */
+    box-shadow: none; /* Remove shadow for larger screens */
+    padding: 0; /* Remove padding for larger screens */
+    opacity: 1; /* Ensure visibility */
+    transform: none; /* Reset transform */
+    margin-right: 10px; /* Add some padding from the right edge */
+}
+
+.hamburger {
+    display: none; /* Hide hamburger by default */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: gold;
+    transition: transform 0.3s ease-in-out;
+}
+
+.hamburger.change .bar1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.hamburger.change .bar2 {
+    opacity: 0;
+}
+
+.hamburger.change .bar3 {
+    transform: rotate(45deg) translate(-5px, -5px);
+}
+
+@media (max-width: 768px) {
+    body {
+        user-select: none; /* Disable text selection on mobile devices */
+    }
+
+    .server-ip {
+        touch-action: manipulation; /* Ensure proper touch interaction */
+    }
+
+    .menu {
+        display: none; /* Hide menu by default on smaller screens */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 10px; /* Add padding from the right edge */
+        background: rgba(34, 34, 34, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px gold;
+        opacity: 0; /* Start with invisible */
+        transform: translateY(-10px); /* Slide up initially */
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .menu.show {
+        display: flex; /* Show menu when toggled */
+        opacity: 1; /* Fade in */
+        transform: translateY(0); /* Slide into position */
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on smaller screens */
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        position: absolute;
+        top: 30px; /* Keep the top position */
+        right: 40px; /* Move 35px to the left (originally 25px) */
+    }
+
+    .content {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .servers {
+        align-items: center; /* Center server panels on smaller screens */
+    }
+
+    .server-info {
+        margin-top: -60px; /* Reduce margin for smaller screens */
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        margin-top: 20vh; /* Push content lower on larger screens */
+    }
+}
+
+.rangi, .klucze {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.rangi h2, .klucze h2 {
+    font-size: 1.8rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.rangi:hover h2, .klucze:hover h2 {
+    color: gold;
+}
+
+.servers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: flex-start; /* Align server panels to the left */
+    justify-content: flex-start; /* Align content to the top-left */
+    width: 100%; /* Ensure the container spans the full width */
+}
+
+.server {
+    display: flex;
+    align-items: center;
+    background: #222;
+    border-radius: 10px;
+    padding: 15px; /* Ensure proper spacing inside panels */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%; /* Allow full width for alignment */
+    max-width: 600px; /* Limit maximum width for better layout */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.server:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px gold;
+}
+
+.server-image {
+    width: 80px; /* Adjust size for smaller screens */
+    height: 80px;
+    border-radius: 10px;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid gold;
+}
+
+.server-details {
+    text-align: left;
+    color: gold;
+    flex: 1; /* Allow details to take up remaining space */
+}
+
+.server-details h3 {
+    margin: 0;
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+}
+
+.server-details p {
+    margin: 5px 0;
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.online {
+    color: limegreen;
+}
+
+.status.offline {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    .server {
+        flex-direction: column; /* Stack content vertically on smaller screens */
+        align-items: center; /* Center align content */
+        text-align: center; /* Center text */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .server-image {
+        margin: 0 0 10px 0; /* Adjust margin for stacked layout */
+    }
+
+    .server-details {
+        text-align: center; /* Center align text */
+    }
+}
+
+@media (min-width: 768px) {
+    .rangi:hover, .klucze:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px gold;
+    }
+}
+
+.panel, .server-ip, .link, .skip-button {
+    outline: none; /* Remove default outline */
+    -webkit-tap-highlight-color: transparent; /* Remove blue highlight on tap */
+    touch-action: manipulation; /* Ensure proper touch interaction */
+}
