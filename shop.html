@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Age</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+.content {
+    flex-direction: column;
+    gap: 30px;
+}
+
+.rangi-container, .klucze-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rangi, .klucze, .pakiety {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.klucze-container h2, .rangi-container h2 {
+    font-size: 1.8rem;
+    color: gold;
+    margin-bottom: 10px;
+}
+
+
+.panel {
+    background-color: #333;
+    color: gold;
+    padding: 20px;
+    width: 200px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.panel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px gold;
+}
+
+.pakiety {
+    margin-top: 30px;
+}
+
+.highlight {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: -5px;
+}
+
+h3 {
+    margin-bottom: 5px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: gold;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 0 0 15px gold;
+    z-index: 201;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popup.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-content {
+    padding: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.popup .close-btn {
+    pointer-events: auto;
+}
+
+.content.blur {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.strona {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.discount {
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    background: red;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transform: rotate(20deg);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.pakiety .panel {
+    position: relative;
+}
+
+
+    </style>
+</head>
+<body>
+    <video id="videoBackground" class="video-background" autoplay loop muted>
+        <source src="loop.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="navbar">
+        <a href="index.html"><h1>Gold Age</h1></a>
+        <div class="hamburger">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="menu">
+            <a href="sociale.html">Linki</a>
+            <a href="news.html">Newsy</a>
+            <a href="shop.html">Sklep</a>
+        </div>
+    </div>
+
+<div class="content">
+    <div class="strona">
+        <div class="rangi-container">
+            <h2>Rangi:</h2>
+            <div class="rangi">
+                <div class="panel" 
+    onclick="showPopup(
+        'VIP', 
+        'Ranga VIP daje dostęp do specjalnych funkcji serwera oraz bonusowych nagród.<br><br>Funkcje:<br>- 3 home<br>- /ec<br>- kit vip<br>- 70% szans na klucz afk'
+    )">
+    <h3>VIP</h3>
+    <p>5zł</p>
+</div>
+
+<div class="panel" 
+    onclick="showPopup(
+        'SPONSOR', 
+        'Ranga SPONSOR zapewnia dodatkowe korzyści oraz unikalne efekty wizualne.<br><br>Funkcje:<br>- 5 home<br>- /ec<br>- /craft<br>- /feed<br>- kit sponsor<br>- 80% szans na klucz afk'
+    )">
+    <h3>SPONSOR</h3>
+    <p>15zł</p>
+</div>
+
+<div class="panel" 
+    onclick="showPopup(
+        'ELITA', 
+        'Najwyższa ranga z wyjątkowymi przywilejami i dostępem do ekskluzywnych przedmiotów.<br><br>Funkcje:<br>- 8 home<br>- /ec<br>- /craft<br>- /feed<br>- /repair<br>- kit elita<br>- 95% szans na klucz afk'
+    )">
+    <h3>ELITA</h3>
+    <p>25zł</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="klucze-container">
+            <h2>Klucze do skrzyń:</h2>
+            <div class="klucze">
+                <div class="panel" onclick="showPopup(
+                    'Rzadka Skrzynia', 'Zawiera rzadkie przedmioty i dodatki.')">
+                    <h3>Rzadka</h3>
+                    <p>1zł</p>
+                </div>
+                <div class="panel" onclick="showPopup(
+                    'Epicka Skrzynia', 'Szansa na epickie przedmioty i bonusy.')">
+                    <h3>Epicka</h3>
+                    <p>4zł</p>
+                </div>
+                <div class="panel" onclick="showPopup(
+                    'Legendarna Skrzynia', 'Najlepsze przedmioty i unikalne nagrody.')">
+                    <h3>Legendarna</h3>
+                    <p>7zł</p>
+                </div>
+            </div>
+            <h2>Pakiety:</h2>
+            <div class="pakiety">
+                <div class="panel" onclick="showPopup(
+                    'Pakiet 5x Epicka', 'Zawiera 5 kluczy epickich do skrzyń!')">
+                    <span class="discount">-6zł</span>
+                    <h3><span class="highlight">5x</span> Epicka</h3>
+                    <p>14zł</p>
+                </div>
+                
+                <div class="panel" onclick="showPopup(
+                    'Pakiet 3x Legendarna', 'Zawiera 3 klucze legendarne do skrzyń!')">
+                    <span class="discount">-6zł</span>
+                    <h3><span class="highlight">3x</span> Legendarna</h3>
+                    <p>15zł</p>
+                </div>
+            </div>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+                <h2 id="popup-title"></h2>
+                <p id="popup-text"></p>
+            </div>
+        </div>
+    <div>
+</div>
+
+
+        <div class="dc">Więcej info na dc</div>
+		
+    <script src="script.js"></script>
+    
+    <script>
+
+function showPopup(title, text) {
+    document.getElementById("popup-title").innerText = title;
+    document.getElementById("popup-text").innerHTML = text;
+
+    let popup = document.getElementById("popup");
+
+    popup.style.display = "block";
+    setTimeout(() => {
+        popup.classList.add("show");
+    }, 10);
+}
+
+function closePopup() {
+    let popup = document.getElementById("popup");
+
+    popup.classList.remove("show");
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 300);
+}
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Age</title>
+
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        body {
+    background-color: #111;
+    color: gold;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #000;
+}
+
+.video-background.loaded {
+    opacity: 1;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(34, 34, 34, 0.9);
+    padding: 10px 0;
+    box-shadow: 0 0 10px gold;
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.navbar a {
+    color: gold;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 15px;
+    transition: transform 0.2s, text-decoration 0.2s;
+}
+
+.navbar a:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+.content {
+    margin-top: 80px;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.server-info, .description {
+    max-width: 400px;
+}
+
+.server-ip {
+    cursor: pointer;
+    padding: 15px;
+    background: gold;
+    color: black;
+    border-radius: 5px;
+    display: inline-block;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.server-ip:hover {
+    transform: scale(1.1);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+.notification {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gold;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.show-notification {
+    bottom: 20px;
+}
+
+.link {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    color: gold;
+    text-decoration: none;
+    background: #333;
+    border: 2px solid gold;
+    border-radius: 5px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.link:hover {
+    transform: scale(1.05);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+.skip-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: gold;
+    color: black;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    z-index: 20;
+    border-radius: 5px;
+    box-shadow: 0 0 10px gold;
+    transition: transform 0.2s ease-in-out;
+}
+
+.skip-button:hover {
+    transform: scale(1.1);
+}
+    </style>
+</head>
+<body>
+    <video id="videoBackground" class="video-background" autoplay loop muted>
+        <source src="loop.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="navbar">
+        <a href="index.html"><h1>Gold Age</h1></a>
+        <div class="hamburger">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="menu">
+            <a href="sociale.html">Linki</a>
+            <a href="news.html">Newsy</a>
+            <a href="shop.html">Sklep</a>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="server-info">
+            <h1>Sociale <br> oraz linki</h1>
+            <a class="link" href="https://discord.gg/sDD6JWQK4F">Discord Goldage</a>
+            <a class="link" href="https://dc.gold-age.net">Discord PGB Hosting</a>
+            <a class="link" href="https://mapa.gold-age.net/">Mapa serwera survival</a>
+            <a class="link" href="">Nic</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for video loading and animations
+        window.addEventListener('load', () => {
+            const videoElem = document.getElementById('videoBackground');
+            videoElem.addEventListener('loadeddata', () => {
+                document.body.classList.add('loaded');
+                videoElem.classList.add('loaded');
+            });
+
+            setTimeout(() => {
+                if (!document.body.classList.contains('loaded')) {
+                    document.body.classList.add('loaded');
+                    videoElem.classList.add('loaded');
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
