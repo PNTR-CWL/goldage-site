@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Age - Strona Główna</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .server-info {
+            margin-top: 30vh;
+        }
+        .menu {
+            display: none; /* Hide menu by default */
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background: rgba(34, 34, 34, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px gold;
+        }
+
+        .menu.show {
+            display: flex; /* Show menu when toggled */
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: gold;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hamburger.change .bar1 {
+            transform: rotate(-45deg) translate(-5px, 5px);
+        }
+
+        .hamburger.change .bar2 {
+            opacity: 0;
+        }
+
+        .hamburger.change .bar3 {
+            transform: rotate(45deg) translate(-5px, -5px);
+        }
+
+        @media (min-width: 768px) {
+            .menu {
+                display: flex; /* Always show menu on larger screens */
+                position: static;
+                flex-direction: row;
+                background: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .hamburger {
+                display: none; /* Hide hamburger on larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <video id="videoBackground" class="video-background" autoplay loop muted>
+        <source src="loop.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="navbar">
+        <a href="index.html"><h1>Gold Age</h1></a>
+        <div class="menu">
+            <a href="sociale.html">Linki</a>
+            <a href="news.html">Newsy</a>
+            <a href="shop.html">Sklep</a>
+        </div>
+        <div class="hamburger">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="server-info">
+            <h1>Witaj na Gold Age!</h1>
+            <p>Kliknij, aby skopiować IP serwera:</p>
+            <div class="server-ip" onclick="copyToClipboard()">gold-age.net</div>
+            <h2>Nasze serwery:</h2>
+        </div>
+        <div class="servers">
+            <div class="server">
+                <img src="../obrazy/lobby.png" alt="Survival" class="server-image">
+                <div class="server-details">
+                    <h3>Survival</h3>
+                    <p>Status: <span class="status online">Online</span></p>
+                    <p>Tryb survival z autorskimi rozwiązaniami i aktywną społecznością.</p>
+                </div>
+            </div>
+            <div class="server">
+                <img src="../obrazy/emilia.png" alt="Duels" class="server-image">
+                <div class="server-details">
+                    <h3>Duels</h3>
+                    <p>Status: <span class="status online">Online</span></p>
+                    <p>Tryb PvP, w którym możesz zmierzyć się z innymi graczami w pojedynkach.</p>
+                </div>
+            </div>
+            <div class="server">
+                <img src="../obrazy/emilia2.png" alt="BoxPvP" class="server-image">
+                <div class="server-details">
+                    <h3>BoxPvP</h3>
+                    <p>Status: <span class="status online">Online</span></p>
+                    <p>Dynamiczny tryb walki w zamkniętych arenach z unikalnymi przedmiotami.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="notification" id="notification">IP skopiowane do schowka!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
