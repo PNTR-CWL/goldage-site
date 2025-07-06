@@ -8,27 +8,26 @@
     <style>
         .content {
             margin-top: 80px;
-            padding: 10px; /* Add padding for smaller screens */
+            padding: 10px;
         }
 
         .server-info {
-            text-align: left; /* Align text to the left */
-            margin-left: 2%; /* Move the section to the left side of the page */
-            max-width: 600px; /* Limit width for better layout */
+            text-align: left;
+            margin-left: 2%;
         }
 
         .server-info h1 {
-            font-size: 2rem; /* Adjust font size for smaller screens */
-            margin-bottom: 20px; /* Add spacing below the title */
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         .link {
-            font-size: 1rem; /* Adjust font size for smaller screens */
-            padding: 10px; /* Reduce padding for smaller screens */
+            font-size: 1rem;
+            padding: 10px;
         }
 
         .menu {
-            display: none; /* Hide menu by default */
+            display: none;
             flex-direction: column;
             position: absolute;
             top: 60px;
@@ -40,7 +39,7 @@
         }
 
         .menu.show {
-            display: flex; /* Show menu when toggled */
+            display: flex;
         }
 
         .hamburger {
@@ -68,10 +67,19 @@
         .hamburger.change .bar3 {
             transform: rotate(45deg) translate(-5px, -5px);
         }
+        @media (max-width: 550px) {
+            .server-info {
+                margin-top: 0% !important;
+                transition: 0.5s;
+				margin-left: 0px;
+            }
+        }
 
+
+        
         @media (min-width: 768px) {
             .menu {
-                display: flex; /* Always show menu on larger screens */
+                display: flex;
                 position: static;
                 flex-direction: row;
                 background: none;
@@ -80,20 +88,20 @@
             }
 
             .hamburger {
-                display: none; /* Hide hamburger on larger screens */
+                display: none;
             }
 
             .server-info {
-                max-width: 600px; /* Increase width for larger screens */
+                max-width: 600px;
             }
 
             .server-info h1 {
-                font-size: 2.5rem; /* Increase font size for larger screens */
+                font-size: 2.5rem; 
             }
 
             .link {
-                font-size: 1.2rem; /* Increase font size for larger screens */
-                padding: 15px; /* Increase padding for larger screens */
+                font-size: 1.2rem; 
+                padding: 15px;
             }
         }
     </style>
