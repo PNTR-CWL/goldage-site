@@ -23,12 +23,12 @@ window.addEventListener('load', () => {
         showContent();
     });
 
-
+    // Dodajemy dodatkowe nasłuchiwanie zdarzenia 'canplay'
     videoElem.addEventListener('canplay', () => {
         showContent();
     });
 
-
+    // Dodajemy fallback, aby upewnić się, że animacja zawsze się wyświetla
     setTimeout(() => {
         if (!document.body.classList.contains('loaded')) {
             showContent();
@@ -52,12 +52,15 @@ window.addEventListener('load', () => {
         });
     });
 
+    // Obsługa menu hamburgera
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('change');
         menu.classList.toggle('show');
     });
+
+    updateMcStatus(); // Call the function to update Minecraft server status
 });
 
 function createVideoElement() {
@@ -95,6 +98,24 @@ function adjustTitleSize() {
             title.style.fontSize = `${parseFloat(getComputedStyle(title).fontSize) - 1}px`;
         }
     }
+}
+
+function updateMcStatus() {
+    fetch("https://api.mcsrvstat.us/2/gold-age.net")
+        .then(res => res.json())
+        .then(data => {
+            const statusDiv = document.getElementById("mc-status");
+            if (data.online) {
+                statusDiv.innerHTML = `Status: <span class="online">Online</span><br>
+                    Graczy online: ${data.players.online}`;
+            } else {
+                statusDiv.innerHTML = `Status: <span class="offline">Offline</span>`;
+            }
+        })
+        .catch(() => {
+            document.getElementById("mc-status").innerHTML =
+                "⚠️ <span class='error'>Błąd podczas sprawdzania statusu.</span>";
+        });
 }
 
 window.addEventListener('resize', adjustTitleSize);
