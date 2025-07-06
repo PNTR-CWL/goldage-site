@@ -1,3 +1,4 @@
+/* RESET & OGÓLNE */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 html, body {
@@ -16,6 +17,7 @@ body {
     overflow-y: auto; /* Ensure vertical scrolling works */
 }
 
+/* TŁO VIDEO */
 .video-background {
     position: fixed;
     top: 0;
@@ -36,6 +38,7 @@ body {
     opacity: 1;
 }
 
+/* NAVBAR, MENU, HAMBURGER */
 .navbar {
     position: fixed;
     top: 0;
@@ -61,12 +64,6 @@ body {
     margin-left: 10px; /* Add some padding from the left edge */
 }
 
-@media (max-width: 400px) {
-    .navbar h1 {
-        font-size: 1.8rem; /* Reduce font size for smaller screens */
-    }
-}
-
 .navbar a {
     color: gold;
     text-decoration: none;
@@ -80,141 +77,6 @@ body {
     text-decoration: underline;
 }
 
-.content {
-    margin: 0 auto;
-    max-width: 100%; /* Prevent content from exceeding the screen width */
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column; /* Change to column for better scaling */
-    justify-content: center; /* Center content vertically */
-    align-items: center;
-    gap: 50px;
-}
-
-.server-info, .description {
-    max-width: 400px;
-    text-align: center; /* Ensure consistent alignment */
-}
-
-.server-info {
-    text-align: left; /* Align text to the left */
-    margin-left: 0; /* Remove extra left margin */
-    align-self: flex-start; /* Align the section to the left side */
-    max-width: 600px; /* Increase the width for better layout */
-    margin-top: 200px; /* Move the section even lower */
-}
-
-.server-info h1 {
-    font-size: 4rem; /* Increase the font size */
-    margin: 0; /* Remove extra margin */
-    white-space: normal; /* Allow wrapping only where necessary */
-}
-
-.server-info p, .server-info h2 {
-    font-size: 1.8rem; /* Increase font size for better visibility */
-}
-
-.server-info h2 {
-    font-size: 1.8rem; /* Keep the font size */
-    margin-bottom: -30px; /* Reduce the margin below the heading */
-}
-
-.description {
-    margin-top: 20px; /* Adjust margin to prevent overlap */
-    max-width: 400px;
-}
-
-.server-ip {
-    cursor: pointer;
-    padding: 15px;
-    background: gold;
-    color: black;
-    border-radius: 5px;
-    display: inline-block;
-    transition: transform 0.2s, background 0.3s;
-    font-size: 1.5rem; /* Increase font size for better visibility */
-    margin: 10px 0; /* Add spacing between elements */
-}
-
-.server-ip:hover {
-    transform: scale(1.1);
-    background: gold;
-    color: black;
-    text-decoration: underline;
-}
-
-.notification {
-    position: fixed;
-    bottom: -100px; /* Move further out of view */
-    left: 50%;
-    transform: translateX(-50%);
-    background: gold;
-    color: black;
-    padding: 15px 20px; /* Increase padding for better spacing */
-    border-radius: 5px;
-    box-shadow: 0 0 10px gold;
-    transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Add opacity transition */
-    white-space: normal; /* Allow text to wrap */
-    text-align: center; /* Center align text */
-    max-width: 90%; /* Limit width for smaller screens */
-    font-size: 1rem; /* Adjust font size for readability */
-    line-height: 1.5; /* Add line spacing for better readability */
-    visibility: hidden; /* Ensure it's hidden when not active */
-    opacity: 0; /* Make it invisible */
-}
-
-.show-notification {
-    bottom: 20px; /* Show notification */
-    visibility: visible; /* Make it visible */
-    opacity: 1; /* Fade in */
-}
-
-.hide-notification {
-    bottom: -100px; /* Move notification out of view */
-    opacity: 0; /* Fade out */
-    visibility: hidden; /* Ensure it's hidden after fading out */
-}
-
-.link {
-    display: block;
-    margin: 10px 0;
-    padding: 15px;
-    color: gold;
-    text-decoration: none;
-    background: #333;
-    border: 2px solid gold;
-    border-radius: 5px;
-    transition: transform 0.2s, background 0.3s;
-}
-
-.link:hover {
-    transform: scale(1.05);
-    background: gold;
-    color: black;
-    text-decoration: underline;
-}
-
-.skip-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    background: gold;
-    color: black;
-    border: none;
-    font-family: 'Press Start 2P', cursive;
-    cursor: pointer;
-    z-index: 20;
-    border-radius: 5px;
-    box-shadow: 0 0 10px gold;
-    transition: transform 0.2s ease-in-out;
-}
-
-.skip-button:hover {
-    transform: scale(1.1);
-}
-
 .menu {
     display: flex; /* Always display menu by default */
     flex-direction: row; /* Align items horizontally */
@@ -225,6 +87,12 @@ body {
     opacity: 1; /* Ensure visibility */
     transform: none; /* Reset transform */
     margin-right: 10px; /* Add some padding from the right edge */
+}
+
+.menu.show {
+    display: flex; /* Show menu when toggled */
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Slide into position */
 }
 
 .hamburger {
@@ -253,81 +121,102 @@ body {
     transform: rotate(45deg) translate(-5px, -5px);
 }
 
-@media (max-width: 768px) {
-    body {
-        user-select: none; /* Disable text selection on mobile devices */
-    }
-
-    .server-ip {
-        touch-action: manipulation; /* Ensure proper touch interaction */
-    }
-
-    .menu {
-        display: none; /* Hide menu by default on smaller screens */
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 10px; /* Add padding from the right edge */
-        background: rgba(34, 34, 34, 0.9);
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px gold;
-        opacity: 0; /* Start with invisible */
-        transform: translateY(-10px); /* Slide up initially */
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
-
-    .menu.show {
-        display: flex; /* Show menu when toggled */
-        opacity: 1; /* Fade in */
-        transform: translateY(0); /* Slide into position */
-    }
-
-    .hamburger {
-        display: flex; /* Show hamburger on smaller screens */
-        flex-direction: column;
-        cursor: pointer;
-        gap: 5px;
-        position: absolute;
-        top: 30px; /* Keep the top position */
-        right: 40px; /* Move 35px to the left (originally 25px) */
-    }
-
-    .content {
-        padding: 10px; /* Reduce padding for smaller screens */
-    }
-
-    .servers {
-        align-items: center; /* Center server panels on smaller screens */
-    }
-
-    .server-info {
-        margin-top: -60px; /* Reduce margin for smaller screens */
-    }
-}
-
-@media (min-width: 768px) {
-    .content {
-        margin-top: 20vh; /* Push content lower on larger screens */
-    }
-}
-
-.rangi, .klucze {
-    background-color: #222;
-    border-radius: 10px;
+/* CONTENT & SEKCJE */
+.content {
+    margin: 0 auto;
+    max-width: 100%; /* Prevent content from exceeding the screen width */
     padding: 20px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Change to column for better scaling */
+    justify-content: center; /* Center content vertically */
+    align-items: center;
+    gap: 50px;
+    transition: 0.5s;
 }
 
-.rangi h2, .klucze h2 {
-    font-size: 1.8rem;
-    transition: color 0.3s ease-in-out;
+.server-info, .description {
+    max-width: 400px;
+    text-align: center; /* Ensure consistent alignment */
 }
 
-.rangi:hover h2, .klucze:hover h2 {
+.server-info {
+    text-align: left; /* Align text to the left */
+    margin-left: 0; /* Remove extra left margin */
+    align-self: flex-start; /* Align the section to the left side */
+    max-width: 600px; /* Increase the width for better layout */
+    margin-top: 200px; /* Move the section even lower */
+    transition: 0.5s;
+}
+
+.server-info h1 {
+    font-size: 4rem; /* Increase the font size */
+    margin: 0; /* Remove extra margin */
+    white-space: normal; /* Allow wrapping only where necessary */
+}
+
+.server-info p, .server-info h2 {
+    font-size: 1.8rem; /* Increase font size for better visibility */
+}
+
+.server-info h2 {
+    font-size: 1.8rem; /* Keep the font size */
+    margin-bottom: -30px; /* Reduce the margin below the heading */
+}
+
+.description {
+    margin-top: 20px; /* Adjust margin to prevent overlap */
+    max-width: 400px;
+}
+
+/* PRZYCISKI, LINKI, PANEL */
+.server-ip, .link, .skip-button, .panel {
+    outline: none; /* Remove default outline */
+    -webkit-tap-highlight-color: transparent; /* Remove blue highlight on tap */
+    touch-action: manipulation; /* Ensure proper touch interaction */
+}
+
+.server-ip {
+    cursor: pointer;
+    padding: 15px;
+    background: gold;
+    color: black;
+    border-radius: 5px;
+    display: inline-block;
+    transition: transform 0.2s, background 0.3s;
+    font-size: 1.5rem; /* Increase font size for better visibility */
+    margin: 10px 0; /* Add spacing between elements */
+}
+
+.server-ip:hover {
+    transform: scale(1.1);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+.link {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
     color: gold;
+    text-decoration: none;
+    background: #333;
+    border: 2px solid gold;
+    border-radius: 5px;
+    transition: transform 0.2s, background 0.3s;
+    transition: 0.5s;
 }
 
+.link:hover {
+    transform: scale(1.05);
+    background: gold;
+    color: black;
+    text-decoration: underline;
+}
+
+
+/* SERWERY */
 .servers {
     display: flex;
     flex-direction: column;
@@ -381,6 +270,90 @@ body {
     font-size: 0.9rem; /* Adjust font size for smaller screens */
 }
 
+/* RANGI I KLUCZE */
+.rangi, .klucze {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.rangi h2, .klucze h2 {
+    font-size: 1.8rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.rangi:hover h2, .klucze:hover h2 {
+    color: gold;
+}
+
+/* STATUS SERWERA */
+#mc-status {
+    position: fixed;
+    right: 2vw;
+    bottom: 2vw;
+    z-index: 999;
+    background: #181818;
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 0;
+    box-shadow: 0 0 16px 0 rgba(255,215,0,0.16);
+    font-size: 1.08em;
+    max-width: 90vw;
+    min-width: 180px;
+    color: #fff;
+    text-align: center;
+    border: 1px solid gold;
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+}
+
+#mc-status .online {
+    color: #4caf50;
+}
+
+#mc-status .offline {
+    color: #f44336;
+}
+
+#mc-status .error {
+    color: #ff9800;
+}
+
+/* NOTYFIKACJE */
+.notification {
+    position: fixed;
+    bottom: -100px; /* Move further out of view */
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: black;
+    padding: 15px 20px; /* Increase padding for better spacing */
+    border-radius: 5px;
+    box-shadow: 0 0 10px gold;
+    transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Add opacity transition */
+    white-space: normal; /* Allow text to wrap */
+    text-align: center; /* Center align text */
+    max-width: 90%; /* Limit width for smaller screens */
+    font-size: 1rem; /* Adjust font size for readability */
+    line-height: 1.5; /* Add line spacing for better readability */
+    visibility: hidden; /* Ensure it's hidden when not active */
+    opacity: 0; /* Make it invisible */
+}
+
+.show-notification {
+    bottom: 20px; /* Show notification */
+    visibility: visible; /* Make it visible */
+    opacity: 1; /* Fade in */
+}
+
+.hide-notification {
+    bottom: -100px; /* Move notification out of view */
+    opacity: 0; /* Fade out */
+    visibility: hidden; /* Ensure it's hidden after fading out */
+}
+
+/* STATUS (np. online/offline) */
 .status {
     font-weight: bold;
 }
@@ -393,32 +366,152 @@ body {
     color: red;
 }
 
-@media (max-width: 768px) {
-    .server {
-        flex-direction: column; /* Stack content vertically on smaller screens */
-        align-items: center; /* Center align content */
-        text-align: center; /* Center text */
-        padding: 10px; /* Reduce padding */
+/* MEDIA QUERIES */
+
+@media (max-width: 550px) {
+    .navbar h1 {
+        font-size: 2rem;
+        transition: font-size 0.3s ease-in-out;
+        margin-left: 10px;
     }
 
-    .server-image {
-        margin: 0 0 10px 0; /* Adjust margin for stacked layout */
+    .link {
+    margin: 10px 0;
+    padding: 25px !important;
+    border: 2px solid rgb(170, 156, 76);
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
     }
 
-    .server-details {
-        text-align: center; /* Center align text */
+    .server-info {
+        transition: 0.5s;
+    }
+
+    .hamburger {
+        top: 31px !important;
     }
 }
 
-@media (min-width: 768px) {
-    .rangi:hover, .klucze:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px gold;
+
+@media (max-width: 768px) {
+
+
+    .server-ip {
+        touch-action: manipulation; /* Ensure proper touch interaction */
     }
+
+    .menu {
+        display: none; /* Hide menuby default on smaller screens */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 10px; /* Add padding from the right edge */
+        background: rgba(34, 34, 34, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px gold;
+        opacity: 0; /* Start with invisible */
+        transform: translateY(-10px); /* Slide up initially */
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .menu.show {
+        display: flex; /* Show menu when toggled */
+        opacity: 1; /* Fade in */
+        transform: translateY(0); /* Slide into position */
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on smaller screens */
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        position: absolute;
+        top: 35px; /* Keep the top position */
+        right: 40px; /* Move 35px to the left (originally 25px) */
+        transition: 0.5s;
+    }
+
+    .content {
+        padding: 10px; /* Reduce padding for smaller screens */
+        transition: 0.5s;
+    }
+
+    .servers {
+        align-items: center; /* Center server panels on smaller screens */
+    }
+
+
+
+}
+
+@media (min-width: 768px) {
+    .content {
+        margin-top: 20vh; /* Push content lower on larger screens */
+    }
+}
+
+.rangi, .klucze {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.rangi h2, .klucze h2 {
+    font-size: 1.8rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.rangi:hover h2, .klucze:hover h2 {
+    color: gold;
 }
 
 .panel, .server-ip, .link, .skip-button {
     outline: none; /* Remove default outline */
     -webkit-tap-highlight-color: transparent; /* Remove blue highlight on tap */
     touch-action: manipulation; /* Ensure proper touch interaction */
+}
+
+#mc-status {
+    position: fixed;
+    right: 2vw;
+    bottom: 2vw;
+    z-index: 999;
+    background: #181818;
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 0;
+    box-shadow: 0 0 16px 0 rgba(255,215,0,0.16);
+    font-size: 1.08em;
+    max-width: 90vw;
+    min-width: 180px;
+    color: #fff;
+    text-align: center;
+    border: 1px solid gold;
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+}
+
+#mc-status .online {
+    color: #4caf50;
+}
+
+#mc-status .offline {
+    color: #f44336;
+}
+
+#mc-status .error {
+    color: #ff9800;
+}
+
+@media (max-width: 600px) {
+    #mc-status {
+        right: 4vw;
+        bottom: 4vw;
+        padding: 10px 8px;
+        font-size: 0.98em;
+        min-width: 120px;
+    }
 }
